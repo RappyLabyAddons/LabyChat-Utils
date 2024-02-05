@@ -1,5 +1,6 @@
 package com.rappytv.labychatutils;
 
+import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
@@ -23,6 +24,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
+        registerCommand(new LabyChatUtilsCommand());
         registerListener(new LabyChatListener());
     }
 
