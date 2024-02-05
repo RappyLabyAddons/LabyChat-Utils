@@ -1,0 +1,10 @@
+{
+    "labychatutils": {
+        "settings": {
+            "name": "LabyChat Utils",
+            "enabled": {
+                "name": "Enabled"
+            }
+        }
+    }
+}
