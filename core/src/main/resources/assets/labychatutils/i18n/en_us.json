@@ -5,6 +5,22 @@
             "enabled": {
                 "name": "Enabled"
             }
+        },
+        "messages": {
+            "clickable": "Clickable",
+            "request": {
+                "incoming": "%s just sent you a friend request!",
+                "accept": "Accept",
+                "decline": "Decline",
+                "empty": "You don't have any incoming friend requests!",
+                "outEmpty": "You don't have any outgoing friend requests!",
+                "notFound": "There was no request found that matches your search!",
+                "accepted": "You and %s are now friends!",
+                "declined": "Successfully declined friend request!",
+                "cleared": "Successfully revoked %s outgoing friend requests!"
+            },
+            "enterPlayerName": "Please enter a player name!",
+            "notConnected": "You're not connected to the LabyChat!"
         }
     }
 }
