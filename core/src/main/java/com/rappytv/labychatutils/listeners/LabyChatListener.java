@@ -8,10 +8,13 @@ import net.labymod.api.client.component.event.ClickEvent;
 import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.TextDecoration;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.labymod.labyconnect.session.chat.LabyConnectChatMessageEvent;
+import net.labymod.api.event.labymod.labyconnect.session.friend.LabyConnectFriendRemoveEvent;
 import net.labymod.api.event.labymod.labyconnect.session.request.LabyConnectIncomingFriendRequestAddEvent;
 import net.labymod.api.labyconnect.protocol.model.chat.TextChatMessage;
+import net.labymod.api.notification.Notification;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -59,6 +62,22 @@ public class LabyChatListener {
                             "/lcu decline " + event.request().getName()
                         ))
                     )
+        );
+    }
+
+    @Subscribe
+    public void onFriendRemove(LabyConnectFriendRemoveEvent event) {
+        if(!config.showRemovedFriends()) return;
+        Laby.labyAPI().notificationController().push(
+            Notification.builder()
+                .title(Component.translatable("labychatutils.messages.remove.title"))
+                .text(Component.translatable(
+                    "labychatutils.messages.remove.description",
+                    Component.text(event.friend().getName())
+                ))
+                .icon(Icon.head(event.friend().getUniqueId(), true))
+                .duration(10000)
+                .build()
         );
     }
 
