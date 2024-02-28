@@ -21,27 +21,27 @@ public class ReplySubCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         if(arguments.length < 1) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.enterPlayerName",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         LabyConnectSession session = Laby.references().labyConnect().getSession();
         if(session == null) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.notConnected",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         List<Chat> chats = session.getChats();
 
         if(chats.isEmpty()) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.chats.empty",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         Optional<Chat> chat = chats
@@ -57,10 +57,10 @@ public class ReplySubCommand extends SubCommand {
             .findFirst();
 
         if(chat.isEmpty()) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.request.notFound",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
 

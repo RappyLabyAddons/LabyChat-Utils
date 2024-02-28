@@ -3,7 +3,6 @@ package com.rappytv.labychatutils;
 import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
 import com.rappytv.labychatutils.widgets.UnreadChatCountWidget;
-import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -16,14 +15,12 @@ import java.util.UUID;
 @AddonMain
 public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
 
-    private static final Component prefix = Component.empty()
-        .append(
-            Component
-            .text("LCU")
-            .color(NamedTextColor.DARK_BLUE)
+    public static final Component prefix = Component.empty()
+        .append(Component.text("[", NamedTextColor.DARK_GRAY))
+        .append(Component.text("LCU", NamedTextColor.DARK_BLUE)
             .decorate(TextDecoration.BOLD)
         )
-        .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
+        .append(Component.text("] ", NamedTextColor.DARK_GRAY));
 
     @Override
     protected void enable() {
@@ -42,11 +39,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
 
         Component component = Component
             .empty()
-            .append(Component.text("[", NamedTextColor.DARK_GRAY))
-            .append(Component.text("LCU", NamedTextColor.DARK_BLUE)
-                .decorate(TextDecoration.BOLD)
-            )
-            .append(Component.text("] ", NamedTextColor.DARK_GRAY))
+            .append(prefix)
             .append(Component.text(name, NamedTextColor.AQUA))
             .append(Component.text(" » ", NamedTextColor.DARK_GRAY))
             .append(Component.text(message, NamedTextColor.WHITE));
@@ -73,18 +66,5 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
                 );
         }
         return component;
-    }
-
-    public static void msg(Component... lines) {
-        Component component = Component.empty()
-            .color(NamedTextColor.WHITE)
-            .append(Component.text("»\n", NamedTextColor.DARK_GRAY));
-
-        for(Component line : lines) {
-            component.append(prefix).append(line);
-        }
-
-        component.append(Component.text("\n»", NamedTextColor.DARK_GRAY));
-        Laby.references().chatExecutor().displayClientMessage(component);
     }
 }

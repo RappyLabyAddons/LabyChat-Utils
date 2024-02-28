@@ -18,41 +18,41 @@ public class ReadSubCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         if(Laby.references().labyConnect().getSession() == null) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.notConnected",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         if(arguments.length < 1) {
-            displayMessage(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.manual",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         UUID uuid;
         try {
             uuid = UUID.fromString(arguments[0]);
         } catch (IllegalArgumentException e) {
-            displayMessage(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.manual",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
 
         TextChatMessage message = LabyChatListener.getMessage(uuid);
 
         if(message == null) {
-            displayMessage(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.manual",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         message.markAsRead();
-        LabyChatUtilsAddon.msg(Component.translatable("labychatutils.messages.markedRead"));
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable("labychatutils.messages.markedRead")));
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.rappytv.labychatutils.command;
 
+import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import com.rappytv.labychatutils.command.subcommands.AcceptSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ClearSubCommand;
 import com.rappytv.labychatutils.command.subcommands.DeclineSubCommand;
@@ -32,13 +33,13 @@ public class LabyChatUtilsCommand extends Command {
             .map(SubCommand::getPrefix)
             .collect(Collectors.joining("|"));
 
-        displayMessage(Component.translatable(
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.usage",
             NamedTextColor.RED,
             Component.text(
                 prefix + " <" + subcommands + ">"
             )
-        ));
+        )));
         return true;
     }
 }

@@ -18,7 +18,8 @@
                 "notFound": "There was no request found that matches your search!",
                 "accepted": "You and %s are now friends!",
                 "declined": "Successfully declined friend request!",
-                "cleared": "Successfully revoked %s outgoing friend requests!"
+                "cleared": "Successfully revoked %s outgoing friend requests!",
+                "sent": "Successfully sent friend request to %s!"
             },
             "enterPlayerName": "Please enter a player name!",
             "notConnected": "You're not connected to the LabyChat!",

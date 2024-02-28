@@ -21,37 +21,37 @@ public class LabyChatListener {
 
     @Subscribe
     public void onFriendRequestReceive(LabyConnectIncomingFriendRequestAddEvent event) {
-        LabyChatUtilsAddon.msg(
+        Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
-                .append(Component.translatable(
-                    "labychatutils.messages.request.incoming",
-                    Component.text(event.request().getName(), NamedTextColor.AQUA)
-                )),
-            Component.empty()
-                .append(
-                    Component.translatable("labychatutils.messages.request.accept")
+                    .append(LabyChatUtilsAddon.prefix)
+                    .append(Component.translatable(
+                        "labychatutils.messages.request.incoming",
+                        Component.text(event.request().getName(), NamedTextColor.AQUA)
+                    ))
+                    .append(Component.translatable("labychatutils.messages.request.accept")
                         .color(NamedTextColor.GREEN)
                         .decorate(TextDecoration.BOLD)
                         .hoverEvent(HoverEvent.showText(
-                            Component.translatable("labychatutils.messages.clickable")
+                            Component
+                                .translatable("labychatutils.messages.clickable")
                                 .color(NamedTextColor.AQUA)
                         ))
                         .clickEvent(ClickEvent.runCommand(
                             "/lcu accept " + event.request().getName()
-                        ))
-                ).append(Component.text(" • ", NamedTextColor.DARK_GRAY))
-                .append(
-                    Component.translatable("labychatutils.messages.request.decline")
+                        )))
+                    .append(Component.text(" • ", NamedTextColor.DARK_GRAY))
+                    .append(Component.translatable("labychatutils.messages.request.decline")
                         .color(NamedTextColor.RED)
                         .decorate(TextDecoration.BOLD)
                         .hoverEvent(HoverEvent.showText(
-                            Component.translatable("labychatutils.messages.clickable")
+                            Component
+                                .translatable("labychatutils.messages.clickable")
                                 .color(NamedTextColor.AQUA)
                         ))
                         .clickEvent(ClickEvent.runCommand(
                             "/lcu decline " + event.request().getName()
                         ))
-                )
+                    )
         );
     }
 

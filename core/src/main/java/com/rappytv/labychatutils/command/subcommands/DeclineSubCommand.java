@@ -19,27 +19,27 @@ public class DeclineSubCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         if(arguments.length < 1) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.enterPlayerName",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         LabyConnectSession session = Laby.references().labyConnect().getSession();
         if(session == null) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.notConnected",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         List<IncomingFriendRequest> requests = session.getIncomingRequests();
 
         if(requests.isEmpty()) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.request.empty",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         Optional<IncomingFriendRequest> request = requests
@@ -48,17 +48,17 @@ public class DeclineSubCommand extends SubCommand {
             .findFirst();
 
         if(request.isEmpty()) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.request.notFound",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         request.get().decline();
-        LabyChatUtilsAddon.msg(Component.translatable(
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.request.declined",
             Component.text(request.get().getName())
-        ).color(NamedTextColor.GREEN));
+        ).color(NamedTextColor.GREEN)));
         return true;
     }
 }
