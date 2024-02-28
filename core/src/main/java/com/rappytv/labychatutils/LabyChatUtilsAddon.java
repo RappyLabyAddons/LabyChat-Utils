@@ -2,6 +2,7 @@ package com.rappytv.labychatutils;
 
 import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
+import com.rappytv.labychatutils.widgets.UnreadChatCountWidget;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
@@ -26,6 +27,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
         registerSettingCategory();
         registerCommand(new LabyChatUtilsCommand());
         registerListener(new LabyChatListener());
+        labyAPI().hudWidgetRegistry().register(new UnreadChatCountWidget());
     }
 
     @Override
