@@ -7,6 +7,10 @@ import com.rappytv.labychatutils.command.subcommands.ReadSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ReplySubCommand;
 import com.rappytv.labychatutils.command.subcommands.SendSubCommand;
 import net.labymod.api.client.chat.command.Command;
+import net.labymod.api.client.chat.command.SubCommand;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
+import java.util.stream.Collectors;
 
 public class LabyChatUtilsCommand extends Command {
 
@@ -23,7 +27,18 @@ public class LabyChatUtilsCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        displayMessage(String.join(", ", arguments));
+        String subcommands = getSubCommands()
+            .stream()
+            .map(SubCommand::getPrefix)
+            .collect(Collectors.joining("|"));
+
+        displayMessage(Component.translatable(
+            "labychatutils.messages.usage",
+            NamedTextColor.RED,
+            Component.text(
+                prefix + " <" + subcommands + ">"
+            )
+        ));
         return true;
     }
 }

@@ -7,6 +7,7 @@
             }
         },
         "messages": {
+            "usage": "Usage: /%s",
             "clickable": "Clickable",
             "request": {
                 "incoming": "%s just sent you a friend request!",
