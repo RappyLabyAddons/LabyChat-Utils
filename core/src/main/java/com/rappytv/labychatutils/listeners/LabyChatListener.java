@@ -1,6 +1,7 @@
 package com.rappytv.labychatutils.listeners;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
+import com.rappytv.labychatutils.LabyChatUtilsConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -18,9 +19,15 @@ import java.util.UUID;
 public class LabyChatListener {
 
     private static final Map<UUID, TextChatMessage> messages = new HashMap<>();
+    private final LabyChatUtilsConfig config;
+
+    public LabyChatListener(LabyChatUtilsAddon addon) {
+        this.config = addon.configuration();
+    }
 
     @Subscribe
     public void onFriendRequestReceive(LabyConnectIncomingFriendRequestAddEvent event) {
+        if(!config.showIncomingRequests()) return;
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
                     .append(LabyChatUtilsAddon.prefix)
@@ -58,11 +65,13 @@ public class LabyChatListener {
     @SuppressWarnings("ConstantConditions")
     @Subscribe
     public void onChatReceive(LabyConnectChatMessageEvent event) {
+        if(!config.showAnyMessages()) return;
         TextChatMessage message = (TextChatMessage) event.message();
         if(event.labyConnect().getSession() == null) return;
         boolean isSelf = message.sender() == event.labyConnect().getSession().self();
         UUID uuid = UUID.randomUUID();
         messages.put(uuid, message);
+        if(isSelf && !config.showOwnMessages()) return;
         Laby.references().chatExecutor().displayClientMessage(LabyChatUtilsAddon.chatMessage(
             message.sender().getName(),
             message.getRawMessage(),

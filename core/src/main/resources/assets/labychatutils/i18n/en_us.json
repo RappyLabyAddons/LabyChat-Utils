@@ -2,8 +2,26 @@
     "labychatutils": {
         "settings": {
             "name": "LabyChat Utils",
+            "header": {
+                "requests": {
+                    "name": "Friend requests"
+                },
+                "messages": {
+                    "name": "LabyChat messages"
+                }
+            },
             "enabled": {
                 "name": "Enabled"
+            },
+            "showIncomingRequests": {
+                "name": "Show incoming requests in chat"
+            },
+            "showAnyMessages": {
+                "name": "Show any received messages in chat",
+                "description": "Disabling this will completely hide received messages in chat."
+            },
+            "showOwnMessages": {
+                "name": "Show your own sent messages in chat"
             }
         },
         "messages": {

@@ -26,7 +26,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
     protected void enable() {
         registerSettingCategory();
         registerCommand(new LabyChatUtilsCommand());
-        registerListener(new LabyChatListener());
+        registerListener(new LabyChatListener(this));
         labyAPI().hudWidgetRegistry().register(new UnreadChatCountWidget());
     }
 
