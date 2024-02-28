@@ -7,6 +7,7 @@
             }
         },
         "messages": {
+            "usage": "Usage: /%s",
             "clickable": "Clickable",
             "request": {
                 "incoming": "%s just sent you a friend request!",
@@ -17,12 +18,15 @@
                 "notFound": "There was no request found that matches your search!",
                 "accepted": "You and %s are now friends!",
                 "declined": "Successfully declined friend request!",
-                "cleared": "Successfully revoked %s outgoing friend requests!"
+                "cleared": "Successfully revoked %s outgoing friend requests!",
+                "sent": "Successfully sent friend request to %s!"
             },
             "enterPlayerName": "Please enter a player name!",
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
-            "read": "Mark as read"
+            "read": "Mark as read",
+            "markedRead": "The message was marked as read.",
+            "manual": "This command can't be run manually!"
         }
     }
 }

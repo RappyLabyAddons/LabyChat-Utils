@@ -22,19 +22,19 @@ public class ClearSubCommand extends SubCommand {
     public boolean execute(String prefix, String[] arguments) {
         LabyConnectSession session = Laby.references().labyConnect().getSession();
         if(session == null) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.notConnected",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         List<OutgoingFriendRequest> requests = session.getOutgoingRequests();
 
         if(requests.isEmpty()) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.request.outEmpty",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
 
@@ -44,12 +44,12 @@ public class ClearSubCommand extends SubCommand {
             names.add(request.getName());
         }
 
-        LabyChatUtilsAddon.msg(Component.translatable(
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.request.cleared",
             Component.text(names.size())
                 .decorate(TextDecoration.UNDERLINED)
                 .hoverEvent(HoverEvent.showText(Component.text(String.join(", ", names))))
-        ).color(NamedTextColor.GREEN));
+        ).color(NamedTextColor.GREEN)));
         return true;
     }
 }

@@ -1,19 +1,21 @@
 package com.rappytv.labychatutils.command.subcommands;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
-import java.util.List;
-import java.util.Optional;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.labyconnect.LabyConnectSession;
-import net.labymod.api.labyconnect.protocol.model.request.IncomingFriendRequest;
+import net.labymod.api.labyconnect.protocol.model.User;
+import net.labymod.api.labyconnect.protocol.model.chat.Chat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-public class DeclineSubCommand extends SubCommand {
+public class ReplySubCommand extends SubCommand {
 
-    public DeclineSubCommand() {
-        super("decline");
+    public ReplySubCommand() {
+        super("reply", "r");
     }
 
     @Override
@@ -33,32 +35,41 @@ public class DeclineSubCommand extends SubCommand {
             )));
             return true;
         }
-        List<IncomingFriendRequest> requests = session.getIncomingRequests();
+        List<Chat> chats = session.getChats();
 
-        if(requests.isEmpty()) {
+        if(chats.isEmpty()) {
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.request.empty",
+                "labychatutils.messages.chats.empty",
                 NamedTextColor.RED
             )));
             return true;
         }
-        Optional<IncomingFriendRequest> request = requests
+        Optional<Chat> chat = chats
             .stream()
-            .filter((req) -> req.getName().equalsIgnoreCase(arguments[0]))
+            .filter((req) -> {
+                List<User> users = req.getParticipants();
+                return users
+                    .stream()
+                    .anyMatch((usr) ->
+                        usr.getName().equalsIgnoreCase(arguments[0])
+                    );
+            })
             .findFirst();
 
-        if(request.isEmpty()) {
+        if(chat.isEmpty()) {
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.request.notFound",
                 NamedTextColor.RED
             )));
             return true;
         }
-        request.get().decline();
-        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-            "labychatutils.messages.request.declined",
-            Component.text(request.get().getName())
-        ).color(NamedTextColor.GREEN)));
+
+        String message = String.join(
+            " ",
+            Arrays.copyOfRange(arguments, 1, arguments.length)
+        );
+
+        chat.get().sendMessage(message);
         return true;
     }
 }

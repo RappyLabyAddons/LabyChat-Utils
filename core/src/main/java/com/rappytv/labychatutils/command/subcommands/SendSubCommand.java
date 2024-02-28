@@ -16,22 +16,27 @@ public class SendSubCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         if(arguments.length < 1) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.enterPlayerName",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
         LabyConnectSession session = Laby.references().labyConnect().getSession();
         if(session == null) {
-            LabyChatUtilsAddon.msg(Component.translatable(
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
                 "labychatutils.messages.notConnected",
                 NamedTextColor.RED
-            ));
+            )));
             return true;
         }
 
         session.sendFriendRequest(arguments[0]);
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
+            "labychatutils.messages.request.sent",
+            NamedTextColor.RED,
+            Component.text(arguments[0])
+        )));
         return true;
     }
 }
