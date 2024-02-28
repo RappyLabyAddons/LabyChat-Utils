@@ -67,7 +67,7 @@ public class LabyChatListener {
             message.sender().getName(),
             message.getRawMessage(),
             uuid,
-            isSelf
+            !isSelf
         ));
     }
 
