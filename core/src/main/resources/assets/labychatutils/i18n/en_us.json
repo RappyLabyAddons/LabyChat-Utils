@@ -3,8 +3,8 @@
         "settings": {
             "name": "LabyChat Utils",
             "header": {
-                "requests": {
-                    "name": "Friend requests"
+                "friends": {
+                    "name": "Friends"
                 },
                 "messages": {
                     "name": "LabyChat messages"
@@ -15,6 +15,10 @@
             },
             "showIncomingRequests": {
                 "name": "Show incoming requests in chat"
+            },
+            "showRemovedFriends": {
+                "name": "Notify you if one of your friends removes you.",
+                "description": "Note that this will also notify you when you remove them from your friend list as there is no way to check who was performing the action."
             },
             "showAnyMessages": {
                 "name": "Show any received messages in chat",
@@ -44,7 +48,11 @@
             "reply": "Reply",
             "read": "Mark as read",
             "markedRead": "The message was marked as read.",
-            "manual": "This command can't be run manually!"
+            "manual": "This command can't be run manually!",
+            "remove": {
+                "title": "LabyMod friendship ended!",
+                "description": "Either you removed %s as a friend or they removed you."
+            }
         }
     }
 }
