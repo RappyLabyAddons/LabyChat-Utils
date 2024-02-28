@@ -60,36 +60,15 @@ public class LabyChatListener {
     public void onChatReceive(LabyConnectChatMessageEvent event) {
         TextChatMessage message = (TextChatMessage) event.message();
         if(event.labyConnect().getSession() == null) return;
-        if(message.sender() == event.labyConnect().getSession().self()) return;
+        boolean isSelf = message.sender() == event.labyConnect().getSession().self();
         UUID uuid = UUID.randomUUID();
         messages.put(uuid, message);
-        Laby.references().chatExecutor().displayClientMessage(
-            Component.empty()
-                .append(Component.text("[", NamedTextColor.DARK_GRAY))
-                .append(Component.text("LCU", NamedTextColor.DARK_BLUE)
-                    .decorate(TextDecoration.BOLD)
-                )
-                .append(Component.text("] ", NamedTextColor.DARK_GRAY))
-                .append(Component.text(message.sender().getName(), NamedTextColor.AQUA))
-                .append(Component.text(" » ", NamedTextColor.DARK_GRAY))
-                .append(Component.text(message.getRawMessage(), NamedTextColor.WHITE))
-                .append(Component.text(" ✔", NamedTextColor.GREEN)
-                    .hoverEvent(HoverEvent.showText(
-                        Component.translatable("labychatutils.messages.read")
-                            .color(NamedTextColor.GREEN)
-                    ))
-                    .clickEvent(ClickEvent.runCommand("/lcu read " + uuid))
-                )
-                .append(Component.text(" ➥", NamedTextColor.BLUE)
-                    .hoverEvent(HoverEvent.showText(
-                        Component.translatable("labychatutils.messages.reply")
-                            .color(NamedTextColor.BLUE)
-                    ))
-                    .clickEvent(ClickEvent.suggestCommand(
-                        "/lcu reply " + message.sender().getName() + " "
-                    ))
-                )
-        );
+        Laby.references().chatExecutor().displayClientMessage(LabyChatUtilsAddon.chatMessage(
+            message.sender().getName(),
+            message.getRawMessage(),
+            uuid,
+            isSelf
+        ));
     }
 
     public static TextChatMessage getMessage(UUID uuid) {

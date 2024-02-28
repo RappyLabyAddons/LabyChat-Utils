@@ -5,7 +5,6 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.protocol.model.User;
 import net.labymod.api.labyconnect.protocol.model.chat.Chat;
@@ -71,18 +70,6 @@ public class ReplySubCommand extends SubCommand {
         );
 
         chat.get().sendMessage(message);
-        LabyChatUtilsAddon.msg(
-            Component
-                .empty()
-                .append(Component.text("[", NamedTextColor.DARK_GRAY))
-                .append(Component.text("LCU", NamedTextColor.DARK_BLUE)
-                    .decorate(TextDecoration.BOLD)
-                )
-                .append(Component.text("] ", NamedTextColor.DARK_GRAY))
-                .append(Component.text(Laby.labyAPI().getName(), NamedTextColor.AQUA))
-                .append(Component.text(" » ", NamedTextColor.DARK_GRAY))
-                .append(Component.text(message, NamedTextColor.WHITE)
-        ).color(NamedTextColor.GREEN));
         return true;
     }
 }
