@@ -15,7 +15,7 @@ labyMod {
         namespace = "labychatutils"
         displayName = "LabyChat Utils"
         author = "RappyTV"
-        description = "Example Description"
+        description = "Interact with the LabyConnect chat by your minecraft chat."
         minecraftVersion = "*"
         version = System.getenv().getOrDefault("VERSION", "1.0.0")
     }
