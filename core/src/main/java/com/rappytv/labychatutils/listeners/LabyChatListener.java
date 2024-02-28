@@ -11,8 +11,13 @@ import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.labymod.labyconnect.session.chat.LabyConnectChatMessageEvent;
 import net.labymod.api.event.labymod.labyconnect.session.request.LabyConnectIncomingFriendRequestAddEvent;
 import net.labymod.api.labyconnect.protocol.model.chat.TextChatMessage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class LabyChatListener {
+
+    private static final Map<UUID, TextChatMessage> messages = new HashMap<>();
 
     @Subscribe
     public void onFriendRequestReceive(LabyConnectIncomingFriendRequestAddEvent event) {
@@ -56,6 +61,8 @@ public class LabyChatListener {
         TextChatMessage message = (TextChatMessage) event.message();
         if(event.labyConnect().getSession() == null) return;
         if(message.sender() == event.labyConnect().getSession().self()) return;
+        UUID uuid = UUID.randomUUID();
+        messages.put(uuid, message);
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
                 .append(Component.text("[", NamedTextColor.DARK_GRAY))
@@ -71,7 +78,7 @@ public class LabyChatListener {
                         Component.translatable("labychatutils.messages.read")
                             .color(NamedTextColor.GREEN)
                     ))
-                    .clickEvent(ClickEvent.runCommand("/lcu read " + "id"))
+                    .clickEvent(ClickEvent.runCommand("/lcu read " + uuid))
                 )
                 .append(Component.text(" ➥", NamedTextColor.BLUE)
                     .hoverEvent(HoverEvent.showText(
@@ -85,4 +92,7 @@ public class LabyChatListener {
         );
     }
 
+    public static TextChatMessage getMessage(UUID uuid) {
+        return messages.get(uuid);
+    }
 }

@@ -22,7 +22,9 @@
             "enterPlayerName": "Please enter a player name!",
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
-            "read": "Mark as read"
+            "read": "Mark as read",
+            "markedRead": "The message was marked as read.",
+            "manual": "This command can't be run manually!"
         }
     }
 }
