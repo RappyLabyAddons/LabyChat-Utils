@@ -38,6 +38,7 @@ public class LabyChatListener {
                         "labychatutils.messages.request.incoming",
                         Component.text(event.request().getName(), NamedTextColor.AQUA)
                     ))
+                    .append(Component.text(" "))
                     .append(Component.translatable("labychatutils.messages.request.accept")
                         .color(NamedTextColor.GREEN)
                         .decorate(TextDecoration.BOLD)
