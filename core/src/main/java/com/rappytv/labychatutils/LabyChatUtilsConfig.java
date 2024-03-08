@@ -11,6 +11,7 @@ public class LabyChatUtilsConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
     @SettingSection("friends")
+    @SettingRequires(value = "denyRequests", invert = true)
     @SwitchSetting
     private final ConfigProperty<Boolean> showIncomingRequests = new ConfigProperty<>(true);
     @SwitchSetting
