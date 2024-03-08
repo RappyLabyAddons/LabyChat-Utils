@@ -3,6 +3,7 @@ package com.rappytv.labychatutils;
 import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
 import com.rappytv.labychatutils.widgets.UnreadChatCountWidget;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -10,6 +11,8 @@ import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import net.labymod.api.revision.SimpleRevision;
+import net.labymod.api.util.version.SemanticVersion;
 import java.util.UUID;
 
 @AddonMain
@@ -21,6 +24,11 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
             .decorate(TextDecoration.BOLD)
         )
         .append(Component.text("] ", NamedTextColor.DARK_GRAY));
+
+    @Override
+    protected void preConfigurationLoad() {
+        Laby.references().revisionRegistry().register(new SimpleRevision("labychatutils", new SemanticVersion("1.0.1"), "2024-03-08"));
+    }
 
     @Override
     protected void enable() {

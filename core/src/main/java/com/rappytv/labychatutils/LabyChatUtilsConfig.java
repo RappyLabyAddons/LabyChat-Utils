@@ -2,6 +2,7 @@ package com.rappytv.labychatutils;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
+import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingRequires;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
@@ -16,6 +17,7 @@ public class LabyChatUtilsConfig extends AddonConfig {
     private final ConfigProperty<Boolean> showIncomingRequests = new ConfigProperty<>(true);
     @SwitchSetting
     private final ConfigProperty<Boolean> showRemovedFriends = new ConfigProperty<>(true);
+    @IntroducedIn(namespace = "labychatutils", value = "1.0.1")
     @SwitchSetting
     private final ConfigProperty<Boolean> denyRequests = new ConfigProperty<>(false);
     @SettingSection("messages")
