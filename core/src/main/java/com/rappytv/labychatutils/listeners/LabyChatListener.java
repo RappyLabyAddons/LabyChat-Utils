@@ -14,6 +14,7 @@ import net.labymod.api.event.labymod.labyconnect.session.chat.LabyConnectChatMes
 import net.labymod.api.event.labymod.labyconnect.session.friend.LabyConnectFriendRemoveEvent;
 import net.labymod.api.event.labymod.labyconnect.session.request.LabyConnectIncomingFriendRequestAddEvent;
 import net.labymod.api.labyconnect.protocol.model.chat.TextChatMessage;
+import net.labymod.api.labyconnect.protocol.model.request.IncomingFriendRequest;
 import net.labymod.api.notification.Notification;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,13 +31,42 @@ public class LabyChatListener {
 
     @Subscribe
     public void onFriendRequestReceive(LabyConnectIncomingFriendRequestAddEvent event) {
+        IncomingFriendRequest request = event.request();
+
+        if(config.denyRequests()) {
+            event.request().decline();
+            Laby.references().chatExecutor().displayClientMessage(
+                Component.empty()
+                    .append(LabyChatUtilsAddon.prefix)
+                    .append(Component.translatable(
+                        "labychatutils.messages.request.autoDeclined",
+                        NamedTextColor.RED,
+                        Component.text(request.getName(), NamedTextColor.AQUA)
+                            .hoverEvent(HoverEvent.showText(Component.translatable(
+                                "labychatutils.messages.showProfile",
+                                NamedTextColor.AQUA
+                            )))
+                            .clickEvent(ClickEvent.openUrl(
+                                "https://laby.net/@" + request.getName()
+                            ))
+                    ))
+            );
+            return;
+        }
         if(!config.showIncomingRequests()) return;
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
                     .append(LabyChatUtilsAddon.prefix)
                     .append(Component.translatable(
                         "labychatutils.messages.request.incoming",
-                        Component.text(event.request().getName(), NamedTextColor.AQUA)
+                        Component.text(request.getName(), NamedTextColor.AQUA)
+                            .hoverEvent(HoverEvent.showText(Component.translatable(
+                                "labychatutils.messages.showProfile",
+                                NamedTextColor.AQUA
+                            )))
+                            .clickEvent(ClickEvent.openUrl(
+                                "https://laby.net/@" + request.getName()
+                            ))
                     ))
                     .append(Component.text(" "))
                     .append(Component.translatable("labychatutils.messages.request.accept")
@@ -48,7 +78,7 @@ public class LabyChatListener {
                                 .color(NamedTextColor.AQUA)
                         ))
                         .clickEvent(ClickEvent.runCommand(
-                            "/lcu accept " + event.request().getName()
+                            "/lcu accept " + request.getName()
                         )))
                     .append(Component.text(" • ", NamedTextColor.DARK_GRAY))
                     .append(Component.translatable("labychatutils.messages.request.decline")
@@ -60,7 +90,7 @@ public class LabyChatListener {
                                 .color(NamedTextColor.AQUA)
                         ))
                         .clickEvent(ClickEvent.runCommand(
-                            "/lcu decline " + event.request().getName()
+                            "/lcu decline " + request.getName()
                         ))
                     )
         );

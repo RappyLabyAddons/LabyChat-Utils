@@ -34,7 +34,7 @@ public class SendSubCommand extends SubCommand {
         session.sendFriendRequest(arguments[0]);
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.request.sent",
-            NamedTextColor.RED,
+            NamedTextColor.GREEN,
             Component.text(arguments[0])
         )));
         return true;

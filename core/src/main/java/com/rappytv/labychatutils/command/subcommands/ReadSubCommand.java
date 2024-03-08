@@ -51,6 +51,13 @@ public class ReadSubCommand extends SubCommand {
             )));
             return true;
         }
+        if(message.isRead()) {
+            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
+                "labychatutils.messages.alreadyRead",
+                NamedTextColor.RED
+            )));
+            return true;
+        }
         message.markAsRead();
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable("labychatutils.messages.markedRead")));
         return true;

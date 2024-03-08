@@ -20,6 +20,10 @@
                 "name": "Notify you if one of your friends removes you.",
                 "description": "Note that this will also notify you when you remove them from your friend list as there is no way to check who was performing the action."
             },
+            "denyRequests": {
+                "name": "Automatically deny friend requests",
+                "description": "This option will prevent any request from getting trough to you. It will tell you in chat tho. This option will deny all current requests after a restart."
+            },
             "showAnyMessages": {
                 "name": "Show any received messages in chat",
                 "description": "Disabling this will completely hide received messages in chat."
@@ -31,6 +35,7 @@
         "messages": {
             "usage": "Usage: /%s",
             "clickable": "Clickable",
+            "showProfile": "Show laby.net profile",
             "request": {
                 "incoming": "%s just sent you a friend request!",
                 "accept": "Accept",
@@ -40,6 +45,7 @@
                 "notFound": "There was no request found that matches your search!",
                 "accepted": "You and %s are now friends!",
                 "declined": "Successfully declined friend request!",
+                "autoDeclined": "Incoming request by %s was automatically declined.",
                 "cleared": "Successfully revoked %s outgoing friend requests!",
                 "sent": "Successfully sent friend request to %s!"
             },
@@ -47,10 +53,12 @@
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
             "read": "Mark as read",
+            "notFound": "Player not found!",
+            "alreadyRead": "You've already read that message!",
             "markedRead": "The message was marked as read.",
             "manual": "This command can't be run manually!",
             "remove": {
-                "title": "LabyMod friendship ended!",
+                "title": "Friend removed!",
                 "description": "Either you removed %s as a friend or they removed you."
             }
         }
