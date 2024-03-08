@@ -31,6 +31,7 @@
         "messages": {
             "usage": "Usage: /%s",
             "clickable": "Clickable",
+            "showProfile": "Show laby.net profile",
             "request": {
                 "incoming": "%s just sent you a friend request!",
                 "accept": "Accept",
@@ -40,6 +41,7 @@
                 "notFound": "There was no request found that matches your search!",
                 "accepted": "You and %s are now friends!",
                 "declined": "Successfully declined friend request!",
+                "autoDeclined": "Incoming request by %s was automatically declined.",
                 "cleared": "Successfully revoked %s outgoing friend requests!",
                 "sent": "Successfully sent friend request to %s!"
             },
@@ -47,10 +49,11 @@
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
             "read": "Mark as read",
+            "alreadyRead": "You've already read that message!",
             "markedRead": "The message was marked as read.",
             "manual": "This command can't be run manually!",
             "remove": {
-                "title": "LabyMod friendship ended!",
+                "title": "Friend removed!",
                 "description": "Either you removed %s as a friend or they removed you."
             }
         }
