@@ -20,6 +20,10 @@
                 "name": "Notify you if one of your friends removes you.",
                 "description": "Note that this will also notify you when you remove them from your friend list as there is no way to check who was performing the action."
             },
+            "denyRequests": {
+                "name": "Automatically deny friend requests",
+                "description": "This option will prevent any request from getting trough to you. It will tell you in chat tho. This option will deny all current requests after a restart."
+            },
             "showAnyMessages": {
                 "name": "Show any received messages in chat",
                 "description": "Disabling this will completely hide received messages in chat."
