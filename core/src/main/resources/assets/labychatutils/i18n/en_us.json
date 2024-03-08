@@ -53,6 +53,7 @@
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
             "read": "Mark as read",
+            "notFound": "Player not found!",
             "alreadyRead": "You've already read that message!",
             "markedRead": "The message was marked as read.",
             "manual": "This command can't be run manually!",

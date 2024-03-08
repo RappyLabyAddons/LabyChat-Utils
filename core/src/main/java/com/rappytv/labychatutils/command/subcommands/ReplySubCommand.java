@@ -58,7 +58,7 @@ public class ReplySubCommand extends SubCommand {
 
         if(chat.isEmpty()) {
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.request.notFound",
+                "labychatutils.messages.notFound",
                 NamedTextColor.RED
             )));
             return true;
