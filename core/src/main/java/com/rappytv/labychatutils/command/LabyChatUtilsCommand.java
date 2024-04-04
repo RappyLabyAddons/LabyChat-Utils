@@ -2,7 +2,6 @@ package com.rappytv.labychatutils.command;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import com.rappytv.labychatutils.command.subcommands.AcceptSubCommand;
-import com.rappytv.labychatutils.command.subcommands.ClearSubCommand;
 import com.rappytv.labychatutils.command.subcommands.DeclineSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ReadSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ReplySubCommand;
@@ -19,7 +18,6 @@ public class LabyChatUtilsCommand extends Command {
         super("lcu");
 
         withSubCommand(new AcceptSubCommand());
-        withSubCommand(new ClearSubCommand());
         withSubCommand(new DeclineSubCommand());
         withSubCommand(new ReplySubCommand());
         withSubCommand(new ReadSubCommand());
