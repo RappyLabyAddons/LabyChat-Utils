@@ -10,7 +10,6 @@ import net.labymod.api.labyconnect.protocol.model.User;
 import net.labymod.api.labyconnect.protocol.model.chat.Chat;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class ReplySubCommand extends SubCommand {
 
@@ -44,32 +43,24 @@ public class ReplySubCommand extends SubCommand {
             )));
             return true;
         }
-        Optional<Chat> chat = chats
-            .stream()
-            .filter((req) -> {
-                List<User> users = req.getParticipants();
-                return users
-                    .stream()
-                    .anyMatch((usr) ->
-                        usr.getName().equalsIgnoreCase(arguments[0])
-                    );
-            })
-            .findFirst();
+        for(Chat chat : chats) {
+            boolean containsUser = false;
+            for(User user : chat.getParticipants()) {
+                if(user.getName().equalsIgnoreCase(arguments[0])) containsUser = true;
+            }
+            if(!containsUser) continue;
+            String message = String.join(
+                " ",
+                Arrays.copyOfRange(arguments, 1, arguments.length)
+            );
 
-        if(chat.isEmpty()) {
-            displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.notFound",
-                NamedTextColor.RED
-            )));
+            chat.sendMessage(message);
             return true;
         }
-
-        String message = String.join(
-            " ",
-            Arrays.copyOfRange(arguments, 1, arguments.length)
-        );
-
-        chat.get().sendMessage(message);
+        displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
+            "labychatutils.messages.notFound",
+            NamedTextColor.RED
+        )));
         return true;
     }
 }

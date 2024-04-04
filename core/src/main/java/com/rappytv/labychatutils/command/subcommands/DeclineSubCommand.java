@@ -2,7 +2,6 @@ package com.rappytv.labychatutils.command.subcommands;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import java.util.List;
-import java.util.Optional;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -42,23 +41,19 @@ public class DeclineSubCommand extends SubCommand {
             )));
             return true;
         }
-        Optional<IncomingFriendRequest> request = requests
-            .stream()
-            .filter((req) -> req.getName().equalsIgnoreCase(arguments[0]))
-            .findFirst();
-
-        if(request.isEmpty()) {
+        for(IncomingFriendRequest request : requests) {
+            if(!request.getName().equalsIgnoreCase(arguments[0])) continue;
+            request.decline();
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.request.notFound",
-                NamedTextColor.RED
-            )));
+                "labychatutils.messages.request.declined",
+                Component.text(request.getName())
+            ).color(NamedTextColor.GREEN)));
             return true;
         }
-        request.get().decline();
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-            "labychatutils.messages.request.declined",
-            Component.text(request.get().getName())
-        ).color(NamedTextColor.GREEN)));
+            "labychatutils.messages.request.notFound",
+            NamedTextColor.RED
+        )));
         return true;
     }
 }
