@@ -10,7 +10,8 @@ import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LabyChatUtilsCommand extends Command {
 
@@ -26,16 +27,15 @@ public class LabyChatUtilsCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        String subcommands = getSubCommands()
-            .stream()
-            .map(SubCommand::getPrefix)
-            .collect(Collectors.joining("|"));
+        List<String> subcommands = new ArrayList<>();
+        for(SubCommand subCommand : getSubCommands())
+            subcommands.add(subCommand.getPrefix());
 
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.usage",
             NamedTextColor.RED,
             Component.text(
-                prefix + " <" + subcommands + ">"
+                prefix + " <" + String.join("|", subcommands) + ">"
             )
         )));
         return true;

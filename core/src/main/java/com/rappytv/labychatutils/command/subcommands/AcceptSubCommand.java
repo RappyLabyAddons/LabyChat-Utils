@@ -8,7 +8,6 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.protocol.model.request.IncomingFriendRequest;
 import java.util.List;
-import java.util.Optional;
 
 public class AcceptSubCommand extends SubCommand {
 
@@ -42,23 +41,19 @@ public class AcceptSubCommand extends SubCommand {
             )));
             return true;
         }
-        Optional<IncomingFriendRequest> request = requests
-            .stream()
-            .filter((req) -> req.getName().equalsIgnoreCase(arguments[0]))
-            .findFirst();
-
-        if(request.isEmpty()) {
+        for(IncomingFriendRequest request : requests) {
+            if(!request.getName().equalsIgnoreCase(arguments[0])) continue;
+            request.accept();
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.request.notFound",
-                NamedTextColor.RED
-            )));
+                "labychatutils.messages.request.accepted",
+                Component.text(request.getName(), NamedTextColor.AQUA)
+            ).color(NamedTextColor.GREEN)));
             return true;
         }
-        request.get().accept();
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-            "labychatutils.messages.request.accepted",
-            Component.text(request.get().getName(), NamedTextColor.AQUA)
-        ).color(NamedTextColor.GREEN)));
+            "labychatutils.messages.request.notFound",
+            NamedTextColor.RED
+        )));
         return true;
     }
 }
