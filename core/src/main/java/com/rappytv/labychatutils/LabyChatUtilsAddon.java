@@ -43,7 +43,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
         return LabyChatUtilsConfig.class;
     }
 
-    public static Component chatMessage(String name, String message, UUID uuid, boolean elements) {
+    public static Component chatMessage(String name, String message, int attachments, UUID uuid, boolean elements) {
 
         Component component = Component
             .empty()
@@ -51,6 +51,15 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
             .append(Component.text(name, NamedTextColor.AQUA))
             .append(Component.text(" » ", NamedTextColor.DARK_GRAY))
             .append(Component.text(message, NamedTextColor.WHITE));
+
+        if(attachments > 0)
+            component
+                .append(Component.text(" "))
+                .append(Component.translatable(
+                    "labychatutils.messages.attachments",
+                    NamedTextColor.AQUA,
+                    Component.text(attachments))
+                );
 
         if(elements) {
             component

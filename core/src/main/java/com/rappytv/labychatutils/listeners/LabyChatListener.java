@@ -14,9 +14,12 @@ import net.labymod.api.event.labymod.labyconnect.session.chat.LabyConnectChatMes
 import net.labymod.api.event.labymod.labyconnect.session.friend.LabyConnectFriendRemoveEvent;
 import net.labymod.api.event.labymod.labyconnect.session.request.LabyConnectIncomingFriendRequestAddEvent;
 import net.labymod.api.labyconnect.protocol.model.chat.TextChatMessage;
+import net.labymod.api.labyconnect.protocol.model.chat.attachment.Attachment;
 import net.labymod.api.labyconnect.protocol.model.request.IncomingFriendRequest;
 import net.labymod.api.notification.Notification;
+import net.labymod.api.util.I18n;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -126,6 +129,7 @@ public class LabyChatListener {
         Laby.references().chatExecutor().displayClientMessage(LabyChatUtilsAddon.chatMessage(
             message.sender().getName(),
             message.getRawMessage(),
+            message.getAttachments().size(),
             uuid,
             !isSelf
         ));
