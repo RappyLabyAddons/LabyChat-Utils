@@ -17,7 +17,7 @@ labyMod {
         author = "RappyTV"
         description = "Interact with the LabyConnect chat by your minecraft chat."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.0.2")
+        version = System.getenv().getOrDefault("VERSION", "1.0.3")
     }
 
     minecraft {
