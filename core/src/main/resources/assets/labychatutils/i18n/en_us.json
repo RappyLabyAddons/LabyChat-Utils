@@ -50,6 +50,7 @@
                 "sent": "Successfully sent friend request to %s!"
             },
             "enterPlayerName": "Please enter a player name!",
+            "enterText": "Please enter the message content you want to send!",
             "notConnected": "You're not connected to the LabyChat!",
             "reply": "Reply",
             "read": "Mark as read",

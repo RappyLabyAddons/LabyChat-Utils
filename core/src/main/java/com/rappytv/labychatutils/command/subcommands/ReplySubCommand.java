@@ -8,6 +8,7 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.protocol.model.User;
 import net.labymod.api.labyconnect.protocol.model.chat.Chat;
+import net.labymod.api.labyconnect.protocol.model.chat.ChatMessage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,12 +50,23 @@ public class ReplySubCommand extends SubCommand {
                 if(user.getName().equalsIgnoreCase(arguments[0])) containsUser = true;
             }
             if(!containsUser) continue;
+            if(arguments.length < 2) {
+                displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
+                    "labychatutils.messages.enterText",
+                    NamedTextColor.RED
+                )));
+                return true;
+            }
             String message = String.join(
                 " ",
                 Arrays.copyOfRange(arguments, 1, arguments.length)
             );
 
             chat.sendMessage(message);
+            for(ChatMessage msg : chat.getMessages()) {
+                if(!msg.isRead())
+                    msg.markAsRead();
+            }
             return true;
         }
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
