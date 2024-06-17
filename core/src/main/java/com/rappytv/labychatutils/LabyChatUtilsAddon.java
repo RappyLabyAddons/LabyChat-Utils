@@ -83,7 +83,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
                             .color(NamedTextColor.BLUE)
                     ))
                     .clickEvent(ClickEvent.suggestCommand(
-                        "/lcu reply " + sender + " "
+                        "/lcu msg " + sender + " "
                     ))
                 );
         }

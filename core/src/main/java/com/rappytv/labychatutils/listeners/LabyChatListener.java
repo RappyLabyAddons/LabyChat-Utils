@@ -3,6 +3,7 @@ package com.rappytv.labychatutils.listeners;
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import com.rappytv.labychatutils.LabyChatUtilsConfig;
 import com.rappytv.labychatutils.command.LabyChatQuickReplyCommand;
+import com.rappytv.labychatutils.command.subcommands.ReplySubCommand;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -118,7 +119,7 @@ public class LabyChatListener {
     @SuppressWarnings("ConstantConditions")
     @Subscribe
     public void onChatReceive(LabyConnectChatMessageEvent event) {
-        LabyChatQuickReplyCommand.setRecentChat(event.chat());
+        ReplySubCommand.setRecentChat(event.chat());
         if(!config.showAnyMessages()) return;
         TextChatMessage message = (TextChatMessage) event.message();
         if(event.labyConnect().getSession() == null) return;

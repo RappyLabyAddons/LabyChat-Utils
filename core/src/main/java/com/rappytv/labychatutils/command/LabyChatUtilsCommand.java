@@ -4,6 +4,7 @@ import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import com.rappytv.labychatutils.command.subcommands.AcceptSubCommand;
 import com.rappytv.labychatutils.command.subcommands.DeclineSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ReadSubCommand;
+import com.rappytv.labychatutils.command.subcommands.MessageSubCommand;
 import com.rappytv.labychatutils.command.subcommands.ReplySubCommand;
 import com.rappytv.labychatutils.command.subcommands.SendSubCommand;
 import net.labymod.api.client.chat.command.Command;
@@ -20,8 +21,9 @@ public class LabyChatUtilsCommand extends Command {
 
         withSubCommand(new AcceptSubCommand());
         withSubCommand(new DeclineSubCommand());
-        withSubCommand(new ReplySubCommand());
+        withSubCommand(new MessageSubCommand());
         withSubCommand(new ReadSubCommand());
+        withSubCommand(new ReplySubCommand());
         withSubCommand(new SendSubCommand());
     }
 
