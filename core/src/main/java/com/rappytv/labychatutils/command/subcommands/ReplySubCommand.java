@@ -2,7 +2,6 @@ package com.rappytv.labychatutils.command.subcommands;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import net.labymod.api.Laby;
-import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;

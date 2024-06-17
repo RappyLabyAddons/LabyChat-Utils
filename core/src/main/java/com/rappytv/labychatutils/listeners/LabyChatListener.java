@@ -2,7 +2,6 @@ package com.rappytv.labychatutils.listeners;
 
 import com.rappytv.labychatutils.LabyChatUtilsAddon;
 import com.rappytv.labychatutils.LabyChatUtilsConfig;
-import com.rappytv.labychatutils.command.LabyChatQuickReplyCommand;
 import com.rappytv.labychatutils.command.subcommands.ReplySubCommand;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
