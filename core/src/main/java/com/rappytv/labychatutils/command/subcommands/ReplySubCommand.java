@@ -39,7 +39,7 @@ public class ReplySubCommand extends SubCommand {
 
         if(chats.isEmpty()) {
             displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
-                "labychatutils.messages.chats.empty",
+                "labychatutils.messages.noChats",
                 NamedTextColor.RED
             )));
             return true;

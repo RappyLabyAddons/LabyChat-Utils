@@ -49,6 +49,7 @@
                 "cleared": "Successfully revoked %s outgoing friend requests!",
                 "sent": "Successfully sent friend request to %s!"
             },
+            "noChats": "You don't have any chats!",
             "enterPlayerName": "Please enter a player name!",
             "enterText": "Please enter the message content you want to send!",
             "attachments": "[%s attachments]",
