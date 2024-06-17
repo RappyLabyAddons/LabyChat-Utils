@@ -32,6 +32,12 @@
                 "name": "Show your own sent messages in chat"
             }
         },
+        "hudWidget": {
+            "labychatutils_unread_count": {
+                "name": "Unread messages",
+                "key": "Unread messages"
+            }
+        },
         "messages": {
             "usage": "Usage: /%s",
             "clickable": "Clickable",

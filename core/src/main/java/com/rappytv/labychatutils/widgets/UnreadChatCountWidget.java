@@ -11,11 +11,9 @@ public class UnreadChatCountWidget extends TextHudWidget<TextHudWidgetConfig> {
 
     private TextLine line;
     private int unread;
-    private final LabyConnectSession session;
 
     public UnreadChatCountWidget() {
         super("labychatutils_unread_count");
-        session = Laby.references().labyConnect().getSession();
     }
 
     @Override
@@ -24,21 +22,21 @@ public class UnreadChatCountWidget extends TextHudWidget<TextHudWidgetConfig> {
 
         unread = 0;
         line = super.createLine(
-            Component.translatable("labychatutils.widgets.unread"),
+            Component.translatable("labychatutils.hudWidget.labychatutils_unread_count.key"),
             unread
         );
     }
 
     @Override
     public void onTick(boolean isEditorContext) {
-        if(session == null) return;
-        if(session.getUnreadCount() == unread) return;
-
         line.updateAndFlush(unread);
     }
 
     @Override
     public boolean isVisibleInGame() {
+        LabyConnectSession session = Laby.references().labyConnect().getSession();
+        if(session == null) return false;
+        if(session.getUnreadCount() != unread) unread = session.getUnreadCount();
         return session.isConnectionEstablished() && unread > 0;
     }
 }
