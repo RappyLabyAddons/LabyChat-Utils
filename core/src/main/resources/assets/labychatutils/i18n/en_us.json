@@ -36,6 +36,10 @@
             "labychatutils_unread_count": {
                 "name": "Unread messages",
                 "key": "Unread messages"
+            },
+            "labychatutils_incoming_friend_request_count": {
+                "name": "Incoming friend requests",
+                "key": "Incoming friend requests"
             }
         },
         "messages": {

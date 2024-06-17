@@ -3,6 +3,7 @@ package com.rappytv.labychatutils;
 import com.rappytv.labychatutils.command.LabyChatQuickReplyCommand;
 import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
+import com.rappytv.labychatutils.widgets.IncomingFriendRequestCountWidget;
 import com.rappytv.labychatutils.widgets.UnreadChatCountWidget;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
@@ -37,6 +38,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
         registerCommand(new LabyChatQuickReplyCommand());
         registerCommand(new LabyChatUtilsCommand());
         registerListener(new LabyChatListener(this));
+        labyAPI().hudWidgetRegistry().register(new IncomingFriendRequestCountWidget());
         labyAPI().hudWidgetRegistry().register(new UnreadChatCountWidget());
     }
 
