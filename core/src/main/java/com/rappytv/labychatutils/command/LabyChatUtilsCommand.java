@@ -29,7 +29,7 @@ public class LabyChatUtilsCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         List<String> subcommands = new ArrayList<>();
         for(SubCommand subCommand : getSubCommands())
-            subcommands.add(subCommand.getPrefix());
+            if(!subCommand.getPrefix().equals("read")) subcommands.add(subCommand.getPrefix());
 
         displayMessage(LabyChatUtilsAddon.prefix.copy().append(Component.translatable(
             "labychatutils.messages.usage",
