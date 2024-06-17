@@ -32,6 +32,16 @@
                 "name": "Show your own sent messages in chat"
             }
         },
+        "hudWidget": {
+            "labychatutils_unread_count": {
+                "name": "Unread messages",
+                "key": "Unread messages"
+            },
+            "labychatutils_incoming_friend_request_count": {
+                "name": "Incoming friend requests",
+                "key": "Incoming friend requests"
+            }
+        },
         "messages": {
             "usage": "Usage: /%s",
             "clickable": "Clickable",
@@ -49,6 +59,8 @@
                 "cleared": "Successfully revoked %s outgoing friend requests!",
                 "sent": "Successfully sent friend request to %s!"
             },
+            "noChats": "You don't have any chats!",
+            "noRecentChat": "You don't have any chat with recent activity!",
             "enterPlayerName": "Please enter a player name!",
             "enterText": "Please enter the message content you want to send!",
             "attachments": "[%s attachments]",

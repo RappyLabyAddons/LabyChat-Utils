@@ -1,7 +1,9 @@
 package com.rappytv.labychatutils;
 
+import com.rappytv.labychatutils.command.LabyChatQuickReplyCommand;
 import com.rappytv.labychatutils.command.LabyChatUtilsCommand;
 import com.rappytv.labychatutils.listeners.LabyChatListener;
+import com.rappytv.labychatutils.widgets.IncomingFriendRequestCountWidget;
 import com.rappytv.labychatutils.widgets.UnreadChatCountWidget;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
@@ -33,8 +35,10 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
+        registerCommand(new LabyChatQuickReplyCommand());
         registerCommand(new LabyChatUtilsCommand());
         registerListener(new LabyChatListener(this));
+        labyAPI().hudWidgetRegistry().register(new IncomingFriendRequestCountWidget());
         labyAPI().hudWidgetRegistry().register(new UnreadChatCountWidget());
     }
 
@@ -43,12 +47,13 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
         return LabyChatUtilsConfig.class;
     }
 
-    public static Component chatMessage(String name, String message, int attachments, UUID uuid, boolean elements) {
-
+    public static Component chatMessage(String sender, String receiver, String message, int attachments, UUID uuid) {
         Component component = Component
             .empty()
             .append(prefix)
-            .append(Component.text(name, NamedTextColor.AQUA))
+            .append(Component.text(sender, NamedTextColor.AQUA))
+            .append(Component.text(" → ", NamedTextColor.DARK_GRAY))
+            .append(Component.text(receiver, NamedTextColor.AQUA))
             .append(Component.text(" » ", NamedTextColor.DARK_GRAY))
             .append(Component.text(message, NamedTextColor.WHITE));
 
@@ -61,7 +66,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
                     Component.text(attachments))
                 );
 
-        if(elements) {
+        if(receiver.equals(Laby.labyAPI().getName())) {
             component
                 .append(Component
                     .text(" ✔", NamedTextColor.GREEN)
@@ -78,7 +83,7 @@ public class LabyChatUtilsAddon extends LabyAddon<LabyChatUtilsConfig> {
                             .color(NamedTextColor.BLUE)
                     ))
                     .clickEvent(ClickEvent.suggestCommand(
-                        "/lcu reply " + name + " "
+                        "/lcu msg " + sender + " "
                     ))
                 );
         }
