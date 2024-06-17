@@ -14,6 +14,7 @@ import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.labymod.labyconnect.session.chat.LabyConnectChatMessageEvent;
 import net.labymod.api.event.labymod.labyconnect.session.friend.LabyConnectFriendRemoveEvent;
 import net.labymod.api.event.labymod.labyconnect.session.request.LabyConnectIncomingFriendRequestAddEvent;
+import net.labymod.api.labyconnect.protocol.model.User;
 import net.labymod.api.labyconnect.protocol.model.chat.TextChatMessage;
 import net.labymod.api.labyconnect.protocol.model.request.IncomingFriendRequest;
 import net.labymod.api.notification.Notification;
@@ -121,16 +122,21 @@ public class LabyChatListener {
         if(!config.showAnyMessages()) return;
         TextChatMessage message = (TextChatMessage) event.message();
         if(event.labyConnect().getSession() == null) return;
-        boolean isSelf = message.sender() == event.labyConnect().getSession().self();
+        User self = event.labyConnect().getSession().self();
+        String sender = message.sender().getName();
+        String receiver = self.getName().equals(sender)
+            ? event.chat().getParticipants().getFirst().getName()
+            : self.getName();
+
         UUID uuid = UUID.randomUUID();
         messages.put(uuid, message);
-        if(isSelf && !config.showOwnMessages()) return;
+        if(sender.equals(self.getName()) && !config.showOwnMessages()) return;
         Laby.references().chatExecutor().displayClientMessage(LabyChatUtilsAddon.chatMessage(
-            message.sender().getName(),
+            sender,
+            receiver,
             message.getRawMessage(),
             message.getAttachments().size(),
-            uuid,
-            !isSelf
+            uuid
         ));
     }
 

@@ -50,6 +50,7 @@
                 "sent": "Successfully sent friend request to %s!"
             },
             "noChats": "You don't have any chats!",
+            "noRecentChat": "You don't have any chat with recent activity!",
             "enterPlayerName": "Please enter a player name!",
             "enterText": "Please enter the message content you want to send!",
             "attachments": "[%s attachments]",
